@@ -1,0 +1,90 @@
+{% extends 'layout/base.html' %}
+{% block title %} Home {% endblock %}
+{% block header %}
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" class="d-block w-100" alt="..." />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Welcome to our site</h5>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Praesentium distinctio vitae unde pariatur ipsum aut nobis, quos
+          inventore ut placeat cupiditate amet, laudantium illo!
+          Laudantium ipsum iste voluptas non voluptatibus?.
+        </p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg" class="d-block w-100" alt="..." />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Enjoy your journey</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+          natus accusamus obcaecati dolores, ipsa dolorem asperiores
+          deleniti modi voluptatem, earum quibusdam ad, consequatur quasi.
+          Dolor expedita aliquid maxime recusandae nihil!.
+        </p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg" class="d-block w-100" alt="..." />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Hopefully we can provide you a pleasure journey</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Suscipit ad aspernatur ut eum non veritatis, dolorem dolores
+          eius reiciendis dolor quia beatae, odit assumenda explicabo
+          ipsam? Dolor, temporibus! Id, atque?.
+        </p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="
+        row
+        gx-4 gx-lg-5
+        row-cols-2 row-cols-md-3 row-cols-xl-4
+        justify-content-center
+      ">
+      {% for item in products %}
+      <div class="col mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" height="50" src="{{ item['img_url']}}" alt="..." />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder">{{item['name']}}</h5>
+              {{"${:,.0f}".format(item['price'])}} VND
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" href="detail.html">View details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
