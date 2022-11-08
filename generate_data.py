@@ -1,5 +1,7 @@
 import json
 
+import uuid
+
 from faker import Faker
 
 import faker_commerce
@@ -21,6 +23,7 @@ with open('sample.json', 'w+') as f:
             'color': fake.color_name(),
             'img_url': fake.image_url(),
             'price': fake.ecommerce_price(),
+            'last_evaluated_key': str(uuid.uuid4())
         }
         data.append(product)
     json.dump(data, f)
