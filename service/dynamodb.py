@@ -1,4 +1,5 @@
 import boto3
+from boto3.dynamodb.conditions import Key, Attr
 import json
 
 class DynamoDBService:
@@ -41,9 +42,21 @@ class DynamoDBService:
     def _connect():
         pass
         
+    def get_all_item(self):
+        products = self.dyn_resource.Table('Products')
+        response = products.scan()
+        items = response['Items']
+        return items
+
 
     def get_all_with_pagination(self, last_evaluated_key: str=None) -> list[str]:
-        pass
+        products = self.dyn_resource.Table('Products')
+        response = products.query(
+            ExclusiveStartKey=last_evaluated_key
+        )
+        items = response['Items']
+        return items
+
 
     def get_detail(self, id: str) -> dict[str, any]:
         products = self.dyn_resource.Table('Products')
@@ -93,7 +106,10 @@ class DynamoDBService:
         )
 
 
-    def delete(id: str):
-        pass
-
-
+    def delete(self, id):
+        products = self.dyn_resource.Table('Products')
+        products.delete_item(
+            Key = {
+                'pid': id
+            }
+        )

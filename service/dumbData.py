@@ -65,7 +65,7 @@ f = open('sample.json')
 items = json.load(f)
 
 with products.batch_writer() as batch:
-    for item in items[:10]:
+    for item in items:
         batch.put_item(
             Item = {
                 'pid': item['pid'],
