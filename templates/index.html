@@ -78,7 +78,7 @@
           </div>
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
-              <a class="btn btn-outline-dark mt-auto" href="detail.html">View details</a>
+              <a class="btn btn-outline-dark mt-auto" href="{{ url_for('details', prod_id=item['pid']) }}">View details</a>
             </div>
           </div>
         </div>
