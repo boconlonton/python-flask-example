@@ -73,7 +73,7 @@ class DynamoDBService:
         products = self.dyn_resource.Table('Products')
         products.put_item(
             Item={
-                'pid': kwargs['id'],
+                'pid': kwargs['pid'],
                 'name': kwargs['name'],
                 'description': kwargs['description'],
                 'material': kwargs['material'],
@@ -82,6 +82,7 @@ class DynamoDBService:
                 'price': kwargs['price']
             }
         )
+        
 
 
     def update(self, id, **kwargs) -> dict[str, any]:

@@ -50,16 +50,16 @@ def update(prod_id):
 def create():
     if request.method == 'POST':
         product = {
-            'pid': request.form['pid'],
+            'pid': int(request.form['pid']),
             'name': request.form['productName'],
             'description': request.form['description'],
             'material': request.form['material'],
             'specification': request.form['specification'],
             'color': request.form['color'],
-            'price': request.form['price']
+            'price': int(request.form['price'])
         }
         prod = service.create(**product)
-        return redirect(url_for('details', prod_id=prod['pid']))
+        return redirect(url_for('details', prod_id=product['pid']))
     return render_template('form.html', product=None)
 
 @app.route('/delete/<int:prod_id>')
