@@ -4,8 +4,9 @@ from .json_data import JSONDataService
 
 class Factory:
 
-    def get(use_dynamo=False, *args, **kwargs):
+    def get(use_dynamo=True, *args, **kwargs):
         if use_dynamo:
-            return DynamoDBService
+            dynamodbService = DynamoDBService()
+            return dynamodbService
         else:
             return JSONDataService

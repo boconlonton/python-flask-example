@@ -1,104 +1,158 @@
-{% extends 'layout/base.html' %}
-{% block title %} {% if product %} Update {% else %} Create {% endif %} product {% endblock %}
-{% block content %}
+{% extends 'layout/base.html' %} {% block title %} {% if product %} Update {%
+else %} Create {% endif %} product {% endblock %} {% block content %}
 <div class="container mt-5 mb-5">
     <div class="row">
-      <h1 class="display-4 text-center">
-        {% if product %} 
-          Update product: {{product['name']}} 
-        {% else %} 
-          Create product
-        {% endif %}
-      </h1>
-      <p class="text-justify">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-        modi ad, id ea inventore nesciunt minus reprehenderit voluptatibus
-        velit porro earum molestiae maiores, quos itaque aut repudiandae
-        expedita minima? Ex! Lorem, ipsum dolor sit amet consectetur
-        adipisicing elit. Quae ducimus doloremque consequatur optio nobis
-        praesentium assumenda maiores iure, repellendus distinctio recusandae
-        delectus ratione? Dicta consectetur quidem fugit, maxime fuga eius.
-      </p>
+        <h1 class="display-4 text-center">
+            {% if product %} Update product: {{product['name']}} {% else %}
+            Create product {% endif %}
+        </h1>
+        <p class="text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
+            modi ad, id ea inventore nesciunt minus reprehenderit voluptatibus
+            velit porro earum molestiae maiores, quos itaque aut repudiandae
+            expedita minima? Ex! Lorem, ipsum dolor sit amet consectetur
+            adipisicing elit. Quae ducimus doloremque consequatur optio nobis
+            praesentium assumenda maiores iure, repellendus distinctio
+            recusandae delectus ratione? Dicta consectetur quidem fugit, maxime
+            fuga eius.
+        </p>
     </div>
     <div class="row">
-      <form method="POST">
-        <div class="mb-3">
-          <label for="productName" class="form-label">Product Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="productName"
-            name="productName"
-            placeholder="Bike"
-            {% if product %} value="{{product['name']}}" {% endif %}
-          />
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            name="description"
-            placeholder="Description"
-            {% if product %} value="{{product['description']}}" {% endif %}
-          />
-        </div>
-        <div class="mb-3">
-          <label for="material" class="form-label">Material</label>
-          <input
-            type="text"
-            class="form-control"
-            id="material"
-            placeholder="abcdsc"
-            name="material"
-            {% if product %} value="{{product['material']}}" {% endif %}
-          />
-        </div>
-        <div class="mb-3">
-          <label for="specification" class="form-label">Specification</label>
-          <input
-            type="text"
-            class="form-control"
-            id="specification"
-            name="specification"
-            placeholder="12 x 12"
-            {% if product %} value="{{product['specification']}}" {% endif %}
-          />
-        </div>
-        <div class="mb-3">
-            <label for="color" class="form-label">Color</label>
-            <input
-              type="text"
-              class="form-control"
-              id="color"
-              name="color"
-              placeholder="Red"
-              {% if product %} value="{{product['color']}}" {% endif %}
-            />
-        </div>
-        <div class="mb-3">
-            <label for="color" class="form-label">Price</label>
-            <input
-              type="number"
-              class="form-control"
-              id="price"
-              name="price"
-              placeholder="1213213"
-              {% if product %} value="{{product['price']}}" {% endif %}
-            />
-        </div>
-        <div class="mb-3 text-center">
-          <button type="submit" class="btn btn-dark">
-            {% if product %} 
-              Update
-            {% else %} 
-              Create
-            {% endif %}
-          </button>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      </form>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="productid" class="form-label">Product ID</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="pid"
+                    name="productid"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['pid']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="productName"
+                    name="productName"
+                    placeholder="Bike"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['name']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    name="description"
+                    placeholder="Description"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['description']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="material" class="form-label">Material</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="material"
+                    placeholder="abcdsc"
+                    name="material"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['material']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="specification" class="form-label"
+                    >Specification</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="specification"
+                    name="specification"
+                    placeholder="12 x 12"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['specification']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="color"
+                    name="color"
+                    placeholder="Red"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['color']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3">
+                <label for="color" class="form-label">Price</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="price"
+                    name="price"
+                    placeholder="1213213"
+                    {%
+                    if
+                    product
+                    %}
+                    value="{{product['price']}}"
+                    {%
+                    endif
+                    %}
+                />
+            </div>
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-dark">
+                    {% if product %} Update {% else %} Create {% endif %}
+                </button>
+            </div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        </form>
     </div>
-  </div>
+</div>
 {% endblock %}
