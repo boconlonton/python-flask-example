@@ -10,12 +10,12 @@ app.config['SECRET_KEY'] = 'w=>FV&0F|1R^jx,~f0$&ci>w-4C?tp'
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-service = Factory.get(use_dynamo=False)
+service = Factory.get(use_dynamo=True)
 
 
 @app.route('/')
 def index():
-    products = service.get_all_with_pagination()
+    products = service.get_all_item()
 
     return render_template('index.html', products=products)
 
@@ -50,6 +50,7 @@ def update(prod_id):
 def create():
     if request.method == 'POST':
         product = {
+            'pid': request.form['pid'],
             'name': request.form['productName'],
             'description': request.form['description'],
             'material': request.form['material'],

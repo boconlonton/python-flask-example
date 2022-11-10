@@ -51,7 +51,8 @@ class DynamoDBService:
 
     def get_all_with_pagination(self, last_evaluated_key: str=None) -> list[str]:
         products = self.dyn_resource.Table('Products')
-        response = products.query(
+        response = products.scan(
+            Limit=10,
             ExclusiveStartKey=last_evaluated_key
         )
         items = response['Items']
@@ -68,37 +69,35 @@ class DynamoDBService:
         product = response['Item']
         return product
 
-    def create(self, _id, _name,_img_url, _price, _description = "No description", _material = "No Material", _specification = "No Specification", _color = "No color") -> dict[str, any]:
+    def create(self, **kwargs) -> dict[str, any]:
         products = self.dyn_resource.Table('Products')
         products.put_item(
             Item={
-                'pid': _id,
-                'name': _name,
-                'description': _description,
-                'material': _material,
-                'specification': _specification,
-                'color': _color,
-                'img_url': _img_url,
-                'price': _price
+                'pid': kwargs['id'],
+                'name': kwargs['name'],
+                'description': kwargs['description'],
+                'material': kwargs['material'],
+                'specification': kwargs['specification'],
+                'color': kwargs['color'],
+                'price': kwargs['price']
             }
         )
 
 
-    def update(self, id, _name='', _img_url='', _price='', _description = '', _material = '', _specification = '', _color = '') -> dict[str, any]:
+    def update(self, id, **kwargs) -> dict[str, any]:
         products = self.dyn_resource.Table('Products')
         products.update_item(
             Key = {
                 'pid': id,
             },
-            UpdateExpression='SET #name = :name, img_url = :img_url, price = :price, description = :description, material = :material, specification = :specification, color = :color',
+            UpdateExpression='SET #name = :name, description = :description, material = :material, specification = :specification, color = :color, price = :price',
             ExpressionAttributeValues = {
-                ':name': _name,
-                ':img_url': _img_url,
-                ':price': _price,
-                ':description': _description,
-                ':material': _material,
-                ':specification': _specification,
-                ':color': _color, 
+                ':name': kwargs['name'],
+                ':description': kwargs['description'],
+                ':material': kwargs['material'],
+                ':specification': kwargs['specification'],
+                ':color': kwargs['color'], 
+                ':price': kwargs['price'],
             },
             ExpressionAttributeNames={
                 "#name": "name"
